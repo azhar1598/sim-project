@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "../contexts/LanguageContext";
 
 interface SidebarProps {
   activeTab: string;
@@ -22,6 +23,7 @@ export default function Sidebar({
 }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleToggleCollapse = () => {
     const newCollapsed = !isCollapsed;
@@ -32,7 +34,7 @@ export default function Sidebar({
   const mainTabs = [
     {
       id: "dashboard",
-      label: "Dashboard",
+      label: t("navigation.dashboard"),
       href: "/dashboard",
       icon: (
         <svg
@@ -52,7 +54,7 @@ export default function Sidebar({
     },
     {
       id: "blocks",
-      label: "Block Entry",
+      label: t("navigation.blocks"),
       href: "/blocks",
       icon: (
         <svg
@@ -72,7 +74,7 @@ export default function Sidebar({
     },
     {
       id: "slabs",
-      label: "Slab Inspection",
+      label: t("navigation.slabs"),
       href: "/slabs",
       icon: (
         <svg
@@ -92,7 +94,7 @@ export default function Sidebar({
     },
     {
       id: "inventory",
-      label: "Inventory",
+      label: t("navigation.inventory"),
       href: "/inventory",
       icon: (
         <svg
@@ -112,7 +114,7 @@ export default function Sidebar({
     },
     {
       id: "analytics",
-      label: "Analytics",
+      label: t("navigation.analytics"),
       href: "/analytics",
       icon: (
         <svg
@@ -135,7 +137,7 @@ export default function Sidebar({
   const bottomTabs = [
     {
       id: "settings",
-      label: "Account Settings",
+      label: t("navigation.account_settings"),
       href: "/settings",
       icon: (
         <svg
@@ -161,7 +163,7 @@ export default function Sidebar({
     },
     {
       id: "support",
-      label: "Help & Support",
+      label: t("navigation.support"),
       href: "/support",
       icon: (
         <svg
@@ -259,7 +261,7 @@ export default function Sidebar({
         <div className="space-y-1">
           {(!isCollapsed || isMobile) && (
             <div className="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-              Main Menu
+              {t("navigation.main_menu")}
             </div>
           )}
           {mainTabs.map((tab) => (
@@ -292,7 +294,7 @@ export default function Sidebar({
         <div className="space-y-1">
           {(!isCollapsed || isMobile) && (
             <div className="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-              Account
+              {t("navigation.account")}
             </div>
           )}
           {bottomTabs.map((tab) => (

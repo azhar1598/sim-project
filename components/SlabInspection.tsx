@@ -14,8 +14,10 @@ import QRScanner from "./QRScanner";
 import TestQRGenerator from "./TestQRGenerator";
 import QRImageUpload from "./QRImageUpload";
 import QRUIDScanner from "./QRUIDScanner";
+import { useTranslation } from "../contexts/LanguageContext";
 
 export default function SlabInspection() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<"scan" | "manual">("scan");
   const [qrInput, setQrInput] = useState("");
   const [selectedBlock, setSelectedBlock] = useState<Block | null>(null);
@@ -285,7 +287,9 @@ export default function SlabInspection() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Slab Inspection</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">
+        {t("slabs.title")}
+      </h1>
 
       {/* Tab Navigation */}
       <div className="mb-6">
@@ -298,7 +302,7 @@ export default function SlabInspection() {
                 : "text-gray-600 hover:text-gray-900"
             }`}
           >
-            📱 Scan QR Code
+            📱 {t("slabs.scan_slab_qr")}
           </button>
           <button
             onClick={() => setActiveTab("manual")}
@@ -308,7 +312,7 @@ export default function SlabInspection() {
                 : "text-gray-600 hover:text-gray-900"
             }`}
           >
-            📝 Manual Selection
+            📝 {t("slabs.manual_selection")}
           </button>
         </nav>
       </div>

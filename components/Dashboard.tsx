@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { Block, Slab, InventoryStats } from "../types";
 import { loadBlocks, loadSlabs } from "../utils/storage";
 import { calculateInventoryStats, formatDate } from "../utils/calculations";
+import { useTranslation } from "../contexts/LanguageContext";
 
 export default function Dashboard() {
+  const { t } = useTranslation();
   const [stats, setStats] = useState<InventoryStats>({
     totalBlocks: 0,
     activeBlocks: 0,
@@ -115,11 +117,10 @@ export default function Dashboard() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-900 bg-clip-text text-transparent">
-              Dashboard Overview
+              {t("dashboard.title")}
             </h1>
             <p className="text-gray-600 mt-3 text-lg">
-              Monitor your stone inventory performance and key metrics in
-              real-time.
+              {t("dashboard.subtitle")}
             </p>
           </div>
           <div className="hidden lg:flex items-center space-x-4">
@@ -145,9 +146,9 @@ export default function Dashboard() {
       {/* Modern Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
-          title="Total Blocks"
+          title={t("dashboard.total_blocks")}
           value={stats.totalBlocks}
-          subtitle={`${stats.activeBlocks} active blocks`}
+          subtitle={`${stats.activeBlocks} ${t("dashboard.active_blocks")}`}
           color="bg-gradient-to-br from-blue-500 to-indigo-600"
           trend={{ value: 12, isUp: true }}
           icon={
@@ -167,9 +168,11 @@ export default function Dashboard() {
           }
         />
         <StatCard
-          title="Total Slabs"
+          title={t("dashboard.total_slabs")}
           value={stats.totalSlabs}
-          subtitle={`${stats.pendingInspection} pending inspection`}
+          subtitle={`${stats.pendingInspection} ${t(
+            "dashboard.pending_inspection"
+          )}`}
           color="bg-gradient-to-br from-green-500 to-emerald-600"
           trend={{ value: 8, isUp: true }}
           icon={
@@ -189,7 +192,7 @@ export default function Dashboard() {
           }
         />
         <StatCard
-          title="Average Yield"
+          title={t("dashboard.average_yield")}
           value={`${stats.averageYield}%`}
           color="bg-gradient-to-br from-yellow-500 to-orange-600"
           trend={{ value: 3, isUp: false }}
@@ -215,9 +218,9 @@ export default function Dashboard() {
           }
         />
         <StatCard
-          title="Approved Slabs"
+          title={t("dashboard.approved_slabs")}
           value={stats.approvedSlabs}
-          subtitle={`${stats.rejectedSlabs} rejected`}
+          subtitle={`${stats.rejectedSlabs} ${t("dashboard.rejected")}`}
           color="bg-gradient-to-br from-purple-500 to-violet-600"
           trend={{ value: 15, isUp: true }}
           icon={
@@ -258,16 +261,16 @@ export default function Dashboard() {
                   />
                 </svg>
               </div>
-              Recent Blocks
+              {t("dashboard.recent_blocks")}
             </h2>
             <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-              View all
+              {t("common.view_all")}
             </button>
           </div>
           <div className="space-y-4">
             {recentBlocks.length === 0 ? (
               <p className="text-gray-500 text-center py-4">
-                No blocks created yet
+                {t("dashboard.no_blocks_yet")}
               </p>
             ) : (
               recentBlocks.map((block) => (
@@ -326,16 +329,16 @@ export default function Dashboard() {
                   />
                 </svg>
               </div>
-              Recent Inspections
+              {t("dashboard.recent_inspections")}
             </h2>
             <button className="text-sm text-green-600 hover:text-green-700 font-medium">
-              View all
+              {t("common.view_all")}
             </button>
           </div>
           <div className="space-y-4">
             {recentSlabs.length === 0 ? (
               <p className="text-gray-500 text-center py-4">
-                No inspections completed yet
+                {t("dashboard.no_inspections_yet")}
               </p>
             ) : (
               recentSlabs.map((slab) => (

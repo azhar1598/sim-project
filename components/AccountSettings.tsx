@@ -3,8 +3,10 @@
 import { useState } from "react";
 import Input from "./ui/Input";
 import Button from "./ui/Button";
+import { useTranslation } from "../contexts/LanguageContext";
 
 export default function AccountSettings() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("profile");
   const [profileData, setProfileData] = useState({
     firstName: "Azhar",
@@ -41,7 +43,9 @@ export default function AccountSettings() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Account Settings</h1>
+        <h1 className="text-3xl font-bold text-gray-900">
+          {t("navigation.account_settings")}
+        </h1>
         <p className="text-gray-600 mt-2">
           Manage your account settings and preferences
         </p>

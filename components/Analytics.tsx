@@ -4,8 +4,10 @@ import { useState, useEffect, useMemo } from "react";
 import { Block, Slab, YieldComparison } from "../types";
 import { loadBlocks, loadSlabs } from "../utils/storage";
 import { calculateYieldPercentage, formatDate } from "../utils/calculations";
+import { useTranslation } from "../contexts/LanguageContext";
 
 export default function Analytics() {
+  const { t } = useTranslation();
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [slabs, setSlabs] = useState<Slab[]>([]);
   const [selectedPeriod, setSelectedPeriod] = useState<
@@ -202,7 +204,7 @@ export default function Analytics() {
     <div className="max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900">
-          Analytics & Yield Tracking
+          {t("analytics.title")}
         </h1>
 
         <div className="flex items-center space-x-4">

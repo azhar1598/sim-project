@@ -4,8 +4,10 @@ import { useState } from "react";
 import Input from "./ui/Input";
 import Textarea from "./ui/Textarea";
 import Button from "./ui/Button";
+import { useTranslation } from "../contexts/LanguageContext";
 
 export default function Support() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("help");
   const [ticketForm, setTicketForm] = useState({
     subject: "",
@@ -71,7 +73,9 @@ export default function Support() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Help & Support</h1>
+        <h1 className="text-3xl font-bold text-gray-900">
+          {t("navigation.support")}
+        </h1>
         <p className="text-gray-600 mt-2">
           Get help with your StoneFactory account and features
         </p>

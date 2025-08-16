@@ -9,8 +9,10 @@ import {
   deleteSlab,
 } from "../utils/storage";
 import { formatDate, calculateSlabArea } from "../utils/calculations";
+import { useTranslation } from "../contexts/LanguageContext";
 
 export default function Inventory() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<"blocks" | "slabs">("blocks");
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [slabs, setSlabs] = useState<Slab[]>([]);
@@ -244,7 +246,7 @@ export default function Inventory() {
     <div className="max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900">
-          Inventory Management
+          {t("inventory.title")}
         </h1>
 
         <div className="flex space-x-3">

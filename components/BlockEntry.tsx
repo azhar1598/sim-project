@@ -13,8 +13,10 @@ import QRCodeDisplay from "./QRCodeDisplay";
 import Input from "./ui/Input";
 import Textarea from "./ui/Textarea";
 import QRUIDScanner from "./QRUIDScanner";
+import { useTranslation } from "../contexts/LanguageContext";
 
 export default function BlockEntry() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     blockId: "",
     length: "",
@@ -168,14 +170,16 @@ export default function BlockEntry() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Block Entry</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">
+        {t("blocks.title")}
+      </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Form Section */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">
-              Add New Stone Block
+              {t("blocks.add_new_block")}
             </h2>
 
             {errors.length > 0 && (
@@ -214,30 +218,30 @@ export default function BlockEntry() {
                 <QRUIDScanner
                   onUIDScanned={handleUIDScanned}
                   onError={(error) => setErrors([error])}
-                  label="Scan Block QR Code"
-                  placeholder="Block ID will appear here after scanning"
+                  label={t("blocks.scan_qr_code")}
+                  placeholder={t("blocks.block_id_placeholder")}
                 />
               </div>
 
               {/* Block ID Input (for manual entry or display) */}
               <Input
-                label="Block ID"
+                label={t("blocks.block_id")}
                 type="text"
                 name="blockId"
                 value={formData.blockId}
                 onChange={handleInputChange}
-                placeholder="Scan QR code or enter manually"
+                placeholder={t("blocks.block_id_placeholder")}
                 className="font-mono"
               />
 
               {/* Dimensions */}
               <div>
                 <h3 className="text-lg font-medium text-gray-900 mb-4">
-                  Block Dimensions (cm)
+                  {t("blocks.dimensions")}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <Input
-                    label="Length (cm)"
+                    label={t("blocks.length")}
                     type="number"
                     name="length"
                     value={formData.length}
@@ -247,7 +251,7 @@ export default function BlockEntry() {
                     placeholder="e.g., 200"
                   />
                   <Input
-                    label="Width (cm)"
+                    label={t("blocks.width")}
                     type="number"
                     name="width"
                     value={formData.width}
@@ -257,7 +261,7 @@ export default function BlockEntry() {
                     placeholder="e.g., 120"
                   />
                   <Input
-                    label="Height (cm)"
+                    label={t("blocks.height")}
                     type="number"
                     name="height"
                     value={formData.height}
@@ -272,7 +276,7 @@ export default function BlockEntry() {
               {/* Slab Thickness */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
-                  label="Slab Thickness (cm)"
+                  label={t("blocks.slab_thickness")}
                   type="number"
                   name="thickness"
                   value={formData.thickness}
@@ -301,12 +305,12 @@ export default function BlockEntry() {
 
               {/* Notes */}
               <Textarea
-                label="Notes (Optional)"
+                label={t("blocks.notes")}
                 name="notes"
                 value={formData.notes}
                 onChange={handleInputChange}
                 rows={3}
-                placeholder="Any additional notes about this block..."
+                placeholder={t("blocks.notes_placeholder")}
               />
 
               <button
