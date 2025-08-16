@@ -46,7 +46,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const activeTab = getActiveTab(pathname);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/40">
       {/* Mobile Overlay */}
       {isMobile && mobileMenuOpen && (
         <div
@@ -97,7 +97,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
         />
 
         {/* Main Content */}
-        <main className="flex-1 overflow-auto bg-gray-50">
+        <main className="flex-1 overflow-auto">
           <div className="p-4 sm:p-6 lg:p-8">{children}</div>
         </main>
       </div>
