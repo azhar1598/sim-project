@@ -254,13 +254,13 @@ export default function Inventory() {
             onClick={() => setShowFilters(!showFilters)}
             className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
           >
-            🔍 Filters
+            🔍 {t("inventory.filters")}
           </button>
           <button
             onClick={exportData}
             className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200"
           >
-            📥 Export
+            📥 {t("inventory.export")}
           </button>
         </div>
       </div>
@@ -279,7 +279,7 @@ export default function Inventory() {
                 : "text-gray-600 hover:text-gray-900"
             }`}
           >
-            🧱 Blocks ({blocks.length})
+            🧱 {t("inventory.blocks")} ({blocks.length})
           </button>
           <button
             onClick={() => {
@@ -292,7 +292,7 @@ export default function Inventory() {
                 : "text-gray-600 hover:text-gray-900"
             }`}
           >
-            📋 Slabs ({slabs.length})
+            📋 {t("inventory.slabs")} ({slabs.length})
           </button>
         </nav>
       </div>
@@ -301,12 +301,14 @@ export default function Inventory() {
       {showFilters && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">Filters</h3>
+            <h3 className="text-lg font-semibold text-gray-900">
+              {t("inventory.filters")}
+            </h3>
             <button
               onClick={clearFilters}
               className="text-sm text-blue-600 hover:text-blue-800"
             >
-              Clear All
+              {t("inventory.clear_all")}
             </button>
           </div>
 
@@ -314,7 +316,7 @@ export default function Inventory() {
             {/* Status Filter */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Status
+                {t("inventory.status")}
               </label>
               <select
                 value={filters.status || ""}
@@ -326,19 +328,23 @@ export default function Inventory() {
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                <option value="">All Statuses</option>
+                <option value="">{t("inventory.all_statuses")}</option>
                 {activeTab === "blocks" ? (
                   <>
-                    <option value="active">Active</option>
-                    <option value="completed">Completed</option>
-                    <option value="archived">Archived</option>
+                    <option value="active">{t("inventory.active")}</option>
+                    <option value="completed">
+                      {t("inventory.completed")}
+                    </option>
+                    <option value="archived">{t("inventory.archived")}</option>
                   </>
                 ) : (
                   <>
-                    <option value="pending">Pending</option>
-                    <option value="inspected">Inspected</option>
-                    <option value="approved">Approved</option>
-                    <option value="rejected">Rejected</option>
+                    <option value="pending">{t("inventory.pending")}</option>
+                    <option value="inspected">
+                      {t("inventory.inspected")}
+                    </option>
+                    <option value="approved">{t("inventory.approved")}</option>
+                    <option value="rejected">{t("inventory.rejected")}</option>
                   </>
                 )}
               </select>
@@ -348,7 +354,7 @@ export default function Inventory() {
             {activeTab === "slabs" && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Quality
+                  {t("inventory.quality")}
                 </label>
                 <select
                   value={filters.quality || ""}
@@ -360,11 +366,11 @@ export default function Inventory() {
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  <option value="">All Qualities</option>
-                  <option value="excellent">Excellent</option>
-                  <option value="good">Good</option>
-                  <option value="fair">Fair</option>
-                  <option value="defective">Defective</option>
+                  <option value="">{t("inventory.all_qualities")}</option>
+                  <option value="excellent">{t("inventory.grade_a")}</option>
+                  <option value="good">{t("inventory.grade_b")}</option>
+                  <option value="fair">{t("inventory.grade_c")}</option>
+                  <option value="defective">{t("inventory.rejected")}</option>
                 </select>
               </div>
             )}
@@ -372,7 +378,7 @@ export default function Inventory() {
             {/* Date Range */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Start Date
+                {t("inventory.from")}
               </label>
               <input
                 type="date"
@@ -389,7 +395,7 @@ export default function Inventory() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                End Date
+                {t("inventory.to")}
               </label>
               <input
                 type="date"
@@ -435,14 +441,16 @@ export default function Inventory() {
                 onClick={handleDeleteSelected}
                 className="bg-red-600 text-white py-1 px-3 rounded text-sm hover:bg-red-700 transition-colors duration-200"
               >
-                🗑️ Delete Selected
+                🗑️ {t("inventory.delete")} {t("common.selected")}
               </button>
             )}
           </div>
 
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <label className="text-sm text-gray-600">Sort by:</label>
+              <label className="text-sm text-gray-600">
+                {t("inventory.sort_by")}:
+              </label>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
@@ -450,16 +458,24 @@ export default function Inventory() {
               >
                 {activeTab === "blocks" ? (
                   <>
-                    <option value="createdAt">Created Date</option>
-                    <option value="dimensions">Size</option>
-                    <option value="estimatedSlabs">Estimated Slabs</option>
-                    <option value="yield">Yield</option>
+                    <option value="createdAt">
+                      {t("inventory.created_date")}
+                    </option>
+                    <option value="dimensions">{t("common.size")}</option>
+                    <option value="estimatedSlabs">
+                      {t("inventory.estimated_slabs")}
+                    </option>
+                    <option value="yield">
+                      {t("dashboard.average_yield")}
+                    </option>
                   </>
                 ) : (
                   <>
-                    <option value="inspectedAt">Inspection Date</option>
-                    <option value="quality">Quality</option>
-                    <option value="area">Area</option>
+                    <option value="inspectedAt">
+                      {t("slabs.inspection_date")}
+                    </option>
+                    <option value="quality">{t("inventory.quality")}</option>
+                    <option value="area">{t("common.area")}</option>
                   </>
                 )}
               </select>
@@ -495,25 +511,25 @@ export default function Inventory() {
                     />
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Block ID
+                    {t("inventory.block_id")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Dimensions
+                    {t("inventory.dimensions")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Slabs
+                    {t("inventory.slabs")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Yield
+                    {t("dashboard.average_yield")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
+                    {t("inventory.status")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Created
+                    {t("inventory.created_date")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
+                    {t("inventory.actions")}
                   </th>
                 </tr>
               </thead>
@@ -535,7 +551,7 @@ export default function Inventory() {
                       {block.dimensions.height} cm
                       <br />
                       <span className="text-xs text-gray-400">
-                        Thickness: {block.thickness}cm
+                        {t("blocks.thickness")}: {block.thickness}cm
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -577,11 +593,7 @@ export default function Inventory() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <button
                         onClick={() => {
-                          if (
-                            confirm(
-                              "Are you sure you want to delete this block?"
-                            )
-                          ) {
+                          if (confirm(t("common.confirm_delete"))) {
                             deleteBlock(block.id);
                             setBlocks(loadBlocks());
                             setSlabs(loadSlabs());
@@ -600,7 +612,7 @@ export default function Inventory() {
             {filteredBlocks.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-gray-500">
-                  No blocks found matching your criteria.
+                  {t("inventory.no_blocks_found")}
                 </p>
               </div>
             )}
@@ -621,25 +633,25 @@ export default function Inventory() {
                     />
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Slab ID
+                    {t("inventory.slab_id")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Block ID
+                    {t("inventory.block_id")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Dimensions
+                    {t("inventory.dimensions")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Quality
+                    {t("inventory.quality")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
+                    {t("inventory.status")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Inspected
+                    {t("inventory.inspected")}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
+                    {t("inventory.actions")}
                   </th>
                 </tr>
               </thead>
@@ -718,17 +730,15 @@ export default function Inventory() {
                             </span>
                           </>
                         ) : (
-                          <span className="text-gray-400">Not inspected</span>
+                          <span className="text-gray-400">
+                            {t("inventory.not_inspected")}
+                          </span>
                         )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <button
                           onClick={() => {
-                            if (
-                              confirm(
-                                "Are you sure you want to delete this slab?"
-                              )
-                            ) {
+                            if (confirm(t("common.confirm_delete"))) {
                               deleteSlab(slab.id);
                               setSlabs(loadSlabs());
                             }
@@ -746,9 +756,7 @@ export default function Inventory() {
 
             {filteredSlabs.length === 0 && (
               <div className="text-center py-12">
-                <p className="text-gray-500">
-                  No slabs found matching your criteria.
-                </p>
+                <p className="text-gray-500">{t("inventory.no_slabs_found")}</p>
               </div>
             )}
           </div>

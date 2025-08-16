@@ -208,16 +208,18 @@ export default function Analytics() {
         </h1>
 
         <div className="flex items-center space-x-4">
-          <label className="text-sm font-medium text-gray-700">Period:</label>
+          <label className="text-sm font-medium text-gray-700">
+            {t("analytics.period")}:
+          </label>
           <select
             value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value as any)}
             className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            <option value="week">Last Week</option>
-            <option value="month">Last Month</option>
-            <option value="quarter">Last Quarter</option>
-            <option value="year">Last Year</option>
+            <option value="week">{t("analytics.last_week")}</option>
+            <option value="month">{t("analytics.last_month")}</option>
+            <option value="quarter">{t("analytics.last_quarter")}</option>
+            <option value="year">{t("analytics.last_year")}</option>
           </select>
         </div>
       </div>
@@ -225,27 +227,29 @@ export default function Analytics() {
       {/* Overview Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatCard
-          title="Average Yield"
+          title={t("analytics.average_yield")}
           value={`${overallStats.averageYield}%`}
-          subtitle={`${overallStats.totalActual}/${overallStats.totalEstimated} slabs`}
+          subtitle={`${overallStats.totalActual}/${
+            overallStats.totalEstimated
+          } ${t("analytics.slabs")}`}
           color="border-blue-500"
         />
         <StatCard
-          title="Total Blocks"
+          title={t("analytics.total_blocks")}
           value={overallStats.totalBlocks}
-          subtitle="in selected period"
+          subtitle={t("analytics.in_selected_period")}
           color="border-green-500"
         />
         <StatCard
-          title="Quality Rate"
+          title={t("analytics.quality_rate")}
           value={`${100 - overallStats.defectRate}%`}
-          subtitle={`${overallStats.defectRate}% defective`}
+          subtitle={`${overallStats.defectRate}% ${t("analytics.defective")}`}
           color="border-purple-500"
         />
         <StatCard
-          title="Total Slabs"
+          title={t("analytics.total_slabs")}
           value={overallStats.totalSlabs}
-          subtitle="inspected"
+          subtitle={t("analytics.inspected")}
           color="border-yellow-500"
         />
       </div>
@@ -254,9 +258,13 @@ export default function Analytics() {
       <div className="mb-6">
         <nav className="flex space-x-1 bg-gray-100 p-1 rounded-lg w-fit">
           {[
-            { id: "yield", label: "Yield Analysis", icon: "📊" },
-            { id: "quality", label: "Quality Distribution", icon: "⭐" },
-            { id: "trends", label: "Trends", icon: "📈" },
+            { id: "yield", label: t("analytics.yield_analysis"), icon: "📊" },
+            {
+              id: "quality",
+              label: t("analytics.quality_distribution"),
+              icon: "⭐",
+            },
+            { id: "trends", label: t("analytics.trends"), icon: "📈" },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -279,7 +287,7 @@ export default function Analytics() {
           {/* Yield Comparison Table */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Block Yield Comparison
+              {t("analytics.block_yield_comparison")}
             </h2>
 
             <div className="overflow-x-auto">
@@ -287,16 +295,16 @@ export default function Analytics() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Block
+                      {t("analytics.block")}
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Est.
+                      {t("analytics.estimated")}
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actual
+                      {t("analytics.actual")}
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Yield
+                      {t("analytics.yield")}
                     </th>
                   </tr>
                 </thead>
@@ -335,12 +343,12 @@ export default function Analytics() {
           {/* Discrepancy Analysis */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Common Discrepancies
+              {t("analytics.common_discrepancies")}
             </h2>
 
             {discrepancyAnalysis.length === 0 ? (
               <p className="text-gray-500 text-center py-8">
-                No discrepancies recorded
+                {t("analytics.no_discrepancies")}
               </p>
             ) : (
               <div className="space-y-3">
@@ -366,7 +374,7 @@ export default function Analytics() {
           {/* Quality Distribution */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Quality Distribution
+              {t("analytics.quality_distribution")}
             </h2>
 
             <div className="space-y-4">
